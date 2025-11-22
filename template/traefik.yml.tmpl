@@ -23,7 +23,7 @@ http:
       entryPoints:
         - "web_ep"
       middlewares:
-        - "apt_service"
+        - "apt_us_service"
     rpm_router:
       rule: "Host(`mirror.cs.vt.edu`)"
       service: "rpm_service"
@@ -31,7 +31,7 @@ http:
         - "web_ep"
 
   middlewares:
-    apt_service:
+    apt_us_service:
       headers:
         customRequestHeaders:
           Host: "us.archive.ubuntu.com"
