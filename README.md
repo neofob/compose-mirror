@@ -17,7 +17,23 @@ Set your DNS entries of these domains to where Traefik is running. You get the g
 192.168.42.42 mirror.cs.vt.edu
 ```
 
+### Quick start
+Assume that you have the repository of us.archive.ubuntu.com downloaded using [apt-mirror-docker][0]
+```bash
+# Adjust your settings in .env as needed
+# Generate traefik.yml file from environment variables in .env
+make
+# This will spin up traefik and apt-mirror-server services
+docker-compose up -d
+```
+
+Now all traffic to us.archive.ubuntu.com and archive.ubuntu.com will be routed properly to apt-mirror-server.
+
+
 ### References
 * https://github.com/neofob/apt-mirror-docker (`neofob-ng` branch)
 * https://github.com/neofob/compose-rpm-mirror
 * https://github.com/neofob/compose-traefik
+
+
+[0]: https://github.com/neofob/apt-mirror-docker
