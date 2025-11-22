@@ -1,0 +1,24 @@
+# Simple http config
+
+http:
+  services:
+    apt_service:
+      loadBalancer:
+        servers:
+          - url: "http://${APT_HOST}:${APT_PORT}/"
+    rpm_service:
+      loadBalancer:
+        servers:
+          - url: "http://${RPM_HOST}:${RPM_PORT}/"
+
+  routers:
+    apt_router:
+      rule: "Host(`us.archive.ubuntu.com`)"
+      service: "apt_service"
+      entryPoints:
+        - "web_ep"
+    rpm_router:
+      rule: "Host(`mirror.cs.vt.edu`)"
+      service: "rpm_service"
+      entryPoints:
+        - "web_ep"

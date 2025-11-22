@@ -1,0 +1,19 @@
+---
+# 1. entrypoint is defined at commandline
+# 2. traefik docker image does not have the directory /etc/traefik
+# So we need to volume mount the config file traefik.yml at /etc/
+services:
+  traefik:
+    image: "traefik:latest"
+    container_name: "traefik"
+    hostname: "traefik"
+    command:
+      - "--api.insecure=true"
+      - "--log.level=DEBUG"
+      - "--entrypoints.web_ep.address=:80"
+      - "--providers.file.filename=/etc/traefik.yml"
+    ports:
+      - "80:80"
+      - "8080:8080" # Traefik Dashboard
+    volumes:
+      - "./traefik/traefik.yml:/etc/traefik.yml:ro"
