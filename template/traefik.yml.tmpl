@@ -2,7 +2,7 @@
 
 http:
   services:
-    apt_service:
+    apt_us_service:
       loadBalancer:
         servers:
           - url: "http://${APT_HOST}:${APT_PORT}/"
@@ -12,13 +12,26 @@ http:
           - url: "http://${RPM_HOST}:${RPM_PORT}/"
 
   routers:
-    apt_router:
+    apt_us_router:
       rule: "Host(`us.archive.ubuntu.com`)"
-      service: "apt_service"
+      service: "apt_us_service"
       entryPoints:
         - "web_ep"
+    apt_router:
+      rule: "Host(`archive.ubuntu.com`)"
+      service: "apt_us_service"
+      entryPoints:
+        - "web_ep"
+      middlewares:
+        - "apt_service"
     rpm_router:
       rule: "Host(`mirror.cs.vt.edu`)"
       service: "rpm_service"
       entryPoints:
         - "web_ep"
+
+  middlewares:
+    apt_service:
+      headers:
+        customRequestHeaders:
+          Host: "us.archive.ubuntu.com"

@@ -3,10 +3,19 @@
 
 ```text
 
-Requests -------------------> Traefik -------------> apt-mirror-server (us.archive.ubuntu.com)
-                                 |-----------------> rpm-mirror-server (mirror.cs.vt.edu/pub/rocky)
+Requests --> Traefik --> apt-mirror-server (us.archive.ubuntu.com, archive.ubuntu.com)
+                |------> rpm-mirror-server (mirror.cs.vt.edu)
 ```
 
+
+### DNS
+Set your DNS entries of these domains to where Traefik is running. You get the gist of it.
+```
+# Traefik runs on 192.168.42.42
+192.168.42.42 us.archive.ubuntu.com
+192.168.42.42 archive.ubuntu.com
+192.168.42.42 mirror.cs.vt.edu
+```
 
 ### References
 * https://github.com/neofob/apt-mirror-docker (`neofob-ng` branch)
