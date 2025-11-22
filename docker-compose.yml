@@ -17,3 +17,22 @@ services:
       - "8080:8080" # Traefik Dashboard
     volumes:
       - "./traefik/traefik.yml:/etc/traefik.yml:ro"
+
+  apt-mirror-server:
+    container_name: apt-mirror-server
+    hostname: apt-mirror-server
+    image: neofob/apt-mirror:server
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    command: [nginx-debug, '-g', 'daemon off;']
+    restart: unless-stopped
+    volumes:
+      - "${MIRROR_DIR}:/mirror:ro"
+      - "${NGINX_CONF}:/etc/nginx/conf.d/mirror.conf:ro"
+    ports:
+      - "8000:8000"
+    deploy:
+      resources:
+        limits:
+          memory: 256M
