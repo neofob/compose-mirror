@@ -9,5 +9,5 @@ Requests -------------------> Traefik -------------> apt-mirror-server (us.archi
 
 
 ### References
-* https://github.com/neofob/apt-mirror-docker (neofob-ng branch)
+* https://github.com/neofob/apt-mirror-docker (`neofob-ng` branch)
 * https://github.com/neofob/compose-rpm-mirror
