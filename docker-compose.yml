@@ -23,7 +23,7 @@ services:
     hostname: apt-mirror-server
     image: neofob/apt-mirror:server
     build:
-      context: .
+      context: ./apt-mirror
       dockerfile: Dockerfile.nginx
     command: [nginx-debug, '-g', 'daemon off;']
     restart: unless-stopped
